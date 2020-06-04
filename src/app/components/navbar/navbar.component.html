@@ -1,0 +1,20 @@
+<nav class="green darken3">
+    <div class="nav-wraper container row">
+        <a href="#" class="brand-logo  col-3"> Shop</a>
+        <ul class="right">
+            <ng-container *ngIf='authReady; else loading'>
+                <ng-container *ngIf="allowNavigation">
+                    <li> <a routerLink="/">Home</a></li>
+                    <li> <a (click)="logoutHandler()">Log Out</a></li>
+                </ng-container>
+                <ng-container *ngIf="!allowNavigation">
+                    <li> <a routerLink="/login">Login</a></li>
+                    <li> <a routerLink="/signup">Sign Up</a></li>
+                </ng-container>
+            </ng-container>
+            <ng-template #loading>
+                Loading...
+            </ng-template>
+        </ul>
+    </div>
+</nav>
