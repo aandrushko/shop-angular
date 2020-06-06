@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
@@ -17,26 +15,29 @@ import { User } from './auth.modules';
 })
 export class AuthService {
   user$: Observable<User>
-
+  userId: String
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
     private router: Router,
     private dbs: DatabaseService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+          this.userId = user.uid;
+          return this.dbs.getUserDataFromDB(user.uid)
         } else {
+          this.userId = ""
           return of(null)
         }
       })
     );
-    // this.user$.subscribe(user => {
-    //   console.log(user)
+    // this.afAuth.onAuthStateChanged((user) => {
+    //   // за допомогою onAuthStateChanged івенту ми можемо як і з this.afAuth.authState
+    //   // підписатись на зміни
+    //   this.userId = user ? user.uid : ""
     // })
-    this.afAuth.authState.subscribe(console.log)
+    // this.afAuth.authState.subscribe(console.log)
   }
   createUser(userData) {
 
@@ -67,6 +68,7 @@ export class AuthService {
           showConfirmButton: false,
           timer: 1500
         });
+        // localStorage.setItem("uid", res.user.uid)
         this.router.navigate(['/'])
       })
       .catch(err => {
@@ -75,12 +77,11 @@ export class AuthService {
           err.message,
           'error'
         )
-        // alert(err.message)
       });
   }
   logout() {
     this.afAuth.signOut().then(res => {
-      // console.log('Loguout', this.afAuth.authState)
+      // localStorage.removeItem("uid");
       this.router.navigate(['/login'])
     });
   }

@@ -4,6 +4,8 @@
         <ul class="right">
             <ng-container *ngIf='authReady; else loading'>
                 <ng-container *ngIf="allowNavigation">
+                    <li><a class="btn-floating btn-middle center waves-effect waves-light red"
+                            routerLink="/profile">{{userNameShort}}</a></li>
                     <li> <a routerLink="/">Home</a></li>
                     <li> <a (click)="logoutHandler()">Log Out</a></li>
                 </ng-container>

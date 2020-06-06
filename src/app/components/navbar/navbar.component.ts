@@ -11,13 +11,14 @@ import { observable } from 'rxjs';
 export class NavbarComponent implements OnInit {
   authReady = false
   navItems: any;
-  allowNavigation: boolean
+  allowNavigation: boolean;
+  userNameShort: string
   constructor(private authService: AuthService) {
-
   }
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.allowNavigation = user !== null ? true : false;
+      this.userNameShort = this.allowNavigation ? user.firstName.substr(0, 1) + user.lastName.substr(0, 1) : "";
       this.authReady = true
     })
   }

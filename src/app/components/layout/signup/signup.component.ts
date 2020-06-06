@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
       displayName: ''
     })
     this.signUpForm.valueChanges.subscribe((form) => {
-      console.log(this.signUpForm)
+      // console.log(this.signUpForm)
       // this.applicationIsValid = (form.password === form.confirmPassword) && 
     })
   }
