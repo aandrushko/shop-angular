@@ -25,7 +25,7 @@ export class DatabaseService {
   // }
   getUserDataFromDB(id) {
     this.isLoading = true
-    return this.afs.doc(`users/${id}/`).valueChanges()
+    return this.afs.doc(`users/${id}/`).valueChanges();
   }
   updateUserDataOnDB(uid, user) {
     return this.usersCollection.doc(uid)
@@ -40,9 +40,16 @@ export class DatabaseService {
         });
       })
   }
-  addItemToUsersCart(uid, item) {
-    // this.afs.doc(`users/${uid}/orderedItems`).get().pipe(
-
-    // )
+  addItemToUsersCart(uid, item, user) {
+    let { orderedItems } = user;
+    let quantity = 1;
+    if (orderedItems && orderedItems.hasOwnProperty(item.itemId)) {
+      quantity = orderedItems[item.itemId] + 1
+    }
+    this.afs.doc(`users/${uid}/`).update({
+      [`orderedItems.${item.itemId}`]: quantity
+    }).then(res => {
+      console.log(res, "added to cart")
+    })
   }
 }

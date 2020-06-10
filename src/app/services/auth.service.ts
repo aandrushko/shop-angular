@@ -30,7 +30,6 @@ export class AuthService {
           //   console.log(res)
           //   return res
           // })
-
           return this.dbs.getUserDataFromDB(user.uid);
         } else {
           this.userId = ""
@@ -45,7 +44,7 @@ export class AuthService {
     //   this.userId = user ? user.uid : ""
     // })
     // this.afAuth.authState.subscribe(console.log)
-    this.user$.subscribe(console.log)
+    // this.user$.subscribe(console.log)
   }
   createUser(userData) {
 

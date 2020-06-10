@@ -22,7 +22,8 @@ import { environment } from 'src/environments/environment';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ShopComponent } from './components/layout/shop/shop.component';
 import { ShopItemComponent } from './components/shop-item/shop-item.component';
-import { MaterializeInputModule } from 'materialize-angular'
+import { MaterializeInputModule } from 'materialize-angular';
+import { CartComponent } from './components/cart/cart.component'
 
 
 //  ----------
@@ -55,7 +56,8 @@ import { MaterializeInputModule } from 'materialize-angular'
     routingComponents,
     UserProfileComponent,
     ShopComponent,
-    ShopItemComponent                 // - exported to build more convinient using
+    ShopItemComponent,
+    CartComponent                 // - exported to build more convinient using
   ],
   imports: [
     BrowserModule,
