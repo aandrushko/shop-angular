@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.userNameShort = this.allowNavigation ? user.firstName.substr(0, 1) + user.lastName.substr(0, 1) : "";
       this.authReady = true
     })
+
   }
   logoutHandler() {
     this.authService.logout();

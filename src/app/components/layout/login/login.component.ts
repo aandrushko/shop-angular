@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
   loginHandler() {
     const { email, password } = this.loginForm.value
-    this.authService.login(email, password);
+    this.authService.login(email, password)
     event.preventDefault();
   };
 

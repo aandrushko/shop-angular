@@ -1,1 +1,18 @@
-<p>shop-item works!</p>
+<div class="col m3 card">
+    <div class="center">
+        <img class="item-image activator responsive-img" [src]="item.imageUrl">
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{item.itemName}}<i
+                class="material-icons right">more_vert</i></span>
+        <p class="left">Price: {{item.price}}</p>
+        <!-- додати пайпи для конвертації в тисячі і валюти -->
+        <p class="right"><button (click)="addItemHandler()">Add to Cart</button>
+        </p>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Short Decription
+            <i class="material-icons right">close</i></span>
+        <p>{{item.shortDescription}}</p>
+    </div>
+</div>

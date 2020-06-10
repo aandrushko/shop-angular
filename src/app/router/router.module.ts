@@ -6,14 +6,19 @@ import { HomeComponent } from '../components/home/home.component';
 import { LoginComponent } from '../components/layout/login/login.component';
 import { SignupComponent } from '../components/layout/signup/signup.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
+import { ShopComponent } from '../components/layout/shop/shop.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-
+    component: HomeComponent
   },
+  {
+    path: 'shop',
+    component: ShopComponent
+  },
+
   {
     path: 'login',
     component: LoginComponent

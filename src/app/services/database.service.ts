@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  private itemsColection: any;
-  items: Observable<any[]>
+  private usersCollection: any;
+  shopingItems: any;
   userData: any;
-  isLoading: boolean
+  isLoading: boolean;
+  orderCollection: any;
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) {
-    this.itemsColection = afs.collection('users');
+    this.usersCollection = afs.collection('users');
+    this.shopingItems = afs.collection("itemsList").valueChanges({ idField: 'itemId' });
   }
   addUserDataToDB(id, user) {
-    this.itemsColection.doc(id).set(user)
+    this.usersCollection.doc(id).set(user)
   }
+  // getOrderState(id) {
+  //   this.afs.doc(`users/${id}`).valueChanges()
+  // }
   getUserDataFromDB(id) {
     this.isLoading = true
-    return this.afs.doc(`users/${id}`).valueChanges()
+    return this.afs.doc(`users/${id}/`).valueChanges()
   }
   updateUserDataOnDB(uid, user) {
-    return this.itemsColection.doc(uid)
+    return this.usersCollection.doc(uid)
       .update(user)
       .then(() => {
         Swal.fire({
@@ -35,5 +39,10 @@ export class DatabaseService {
           timer: 1500
         });
       })
+  }
+  addItemToUsersCart(uid, item) {
+    // this.afs.doc(`users/${uid}/orderedItems`).get().pipe(
+
+    // )
   }
 }

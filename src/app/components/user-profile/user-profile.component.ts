@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import * as M from '../../../../node_modules/materialize-css'
 
 @Component({
   selector: 'app-user-profile',
@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
       phoneNumber,
       email,
       displayName
-    } = this.userData;
+    } = user;
     this.userForm.setValue({
       firstName: firstName,
       lastName: lastName,

@@ -14,8 +14,9 @@ import { User } from './auth.modules';
   providedIn: 'root'
 })
 export class AuthService {
-  user$: Observable<User>
-  userId: String
+  user$: any
+  userId: String;
+  orderState: any
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
@@ -25,9 +26,15 @@ export class AuthService {
       switchMap(user => {
         if (user) {
           this.userId = user.uid;
-          return this.dbs.getUserDataFromDB(user.uid)
+          // this.orderState = this.dbs.getOrderState(user.uid).subscribe(res => {
+          //   console.log(res)
+          //   return res
+          // })
+
+          return this.dbs.getUserDataFromDB(user.uid);
         } else {
           this.userId = ""
+          this.orderState = null
           return of(null)
         }
       })
@@ -38,6 +45,7 @@ export class AuthService {
     //   this.userId = user ? user.uid : ""
     // })
     // this.afAuth.authState.subscribe(console.log)
+    this.user$.subscribe(console.log)
   }
   createUser(userData) {
 
@@ -58,7 +66,7 @@ export class AuthService {
       });
   }
   login(email, password) {
-    this.afAuth.signInWithEmailAndPassword(email, password)
+    return this.afAuth.signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Logined', this.afAuth.authState);
         Swal.fire({
@@ -69,7 +77,7 @@ export class AuthService {
           timer: 1500
         });
         // localStorage.setItem("uid", res.user.uid)
-        this.router.navigate(['/'])
+        // this.router.navigate(['/'])
       })
       .catch(err => {
         Swal.fire(
