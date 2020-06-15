@@ -1,1 +1,15 @@
-<i class="large material-icons">shopping_cart</i>
+<div *ngIf="!isLoading; else loading ">
+
+</div>
+<ng-template #loading>
+    loading...
+</ng-template>
+<div class="row">
+    <div *ngFor='let item of orderedItems' class="col">
+        <button (click)='removeItemFromOrder(item.id)'>-</button>
+        <h3>
+            {{item.itemName}} #{{item.number}}
+        </h3>
+        <button (click)='addItemToOrder(item.id)'>+</button>
+    </div>
+</div>

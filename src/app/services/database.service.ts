@@ -50,6 +50,6 @@ export class DatabaseService {
       [`orderedItems.${item.itemId}`]: quantity
     }).then(res => {
       console.log(res, "added to cart")
-    })
+    }).catch(err => err)
   }
 }

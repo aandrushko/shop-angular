@@ -7,9 +7,14 @@ import { LoginComponent } from '../components/layout/login/login.component';
 import { SignupComponent } from '../components/layout/signup/signup.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { ShopComponent } from '../components/layout/shop/shop.component';
+import { CartComponent } from '../components/cart/cart.component';
 
 
 const routes: Routes = [
+  {
+    path: 'cart',
+    component: CartComponent
+  },
   {
     path: '',
     component: HomeComponent

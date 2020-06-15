@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
       this.allowNavigation = user !== null ? true : false;
       if (this.allowNavigation) {
         this.userNameShort = user.firstName.substr(0, 1) + user.lastName.substr(0, 1)
+
         this.ordersTotal = Object.values(user.orderedItems).length > 0 ? Object.values(user.orderedItems).reduce((a: number, b: number): number => { return a + b }) : 0
       } else {
         this.userNameShort = "";

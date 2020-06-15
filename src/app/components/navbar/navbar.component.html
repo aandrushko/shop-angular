@@ -11,8 +11,11 @@
                             routerLink="/profile">{{userNameShort}}</a></li>
                     <li> <a (click)="logoutHandler()">Log Out</a></li>
                     <li class='cart-link'>
-                        <i class="material-icons">shopping_cart</i>
-                        <div *ngIf='ordersTotal>0' class="notification-badge"><span>{{ordersTotal}}</span></div>
+                        <a routerLink="/cart">
+                            <i class="material-icons">shopping_cart</i>
+                            <div *ngIf='ordersTotal>0' class="notification-badge"><span>{{ordersTotal}}</span></div>
+                        </a>
+
 
                     </li>
                 </ng-container>
